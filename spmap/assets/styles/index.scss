@@ -1,0 +1,54 @@
+@import "fonts";
+@import "variables";
+@import "button";
+@import "legend";
+@import "legend-item";
+@import "popup";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: $fontFamily;
+}
+
+h1,
+h3,
+h4,
+h5,
+h5,
+h6 {
+  font-family: $fontFamily;
+}
+
+#main {
+  min-height: 100%;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+@media (min-width: $deviceWidth) {
+  #main {
+    flex-direction: row;
+    align-self: center;
+  }
+  #map {
+    flex-direction: column;
+  }
+}
+
+#map {
+  flex: 1;
+  flex-direction: row;
+}
+
+.flex-child {
+  flex: 1;
+}

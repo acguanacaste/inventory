@@ -1,0 +1,25 @@
+{
+  "name": "inventory",
+  "version": "0.1.0",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^2.0.1",
+    "express": "^4.16.3",
+    "generate-schema": "^2.6.0",
+    "mongoose": "^5.3.4"
+  },
+  "scripts": {
+    "build": "babel server --out-dir build --presets=es2015",
+    "start": "nodemon --exec babel-node --presets env src/index.js"
+  },
+  "description": "Web app to browse biodiverstity invetory data",
+  "main": "src/index.js",
+  "author": "Federico Matarrita",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}
