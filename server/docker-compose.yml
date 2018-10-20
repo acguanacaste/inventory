@@ -6,4 +6,4 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /srv/www/inventory/mongo:/bitnami
+      - /srv/www/inventory/server/mongo:/bitnami
