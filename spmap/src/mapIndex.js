@@ -32,20 +32,22 @@ map.on("load", () => {
     wrapperEl
         ? legendEl.replaceChild(legendInnerEl, wrapperEl)
         : legendEl.appendChild(legendInnerEl);
+
+    // Press Command to Scrollzoom
+    document.body.addEventListener("keydown", function(event) {
+        const { metaKey, ctrlKey } = event;
+        if (metaKey || ctrlKey) {
+            map.scrollZoom.enable();
+        }
+    });
+    document.body.addEventListener("keyup", function(event) {
+        const { metaKey, ctrlKeyg } = event;
+        if (metaKey || ctrlKey) {
+            map.scrollZoom.disable();
+        }
+    });
 });
 
-// Press Command to Scrollzoom
-document.body.addEventListener("keydown", function(event) {
-    const { metaKey, ctrlKey } = event;
-    if (metaKey || ctrlKey) {
-        map.scrollZoom.enable();
-    }
-});
-document.body.addEventListener("keyup", function(event) {
-    const { metaKey, ctrlKeyg } = event;
-    if (metaKey || ctrlKey) {
-        map.scrollZoom.disable();
-    }
-});
+
 
 export default map;

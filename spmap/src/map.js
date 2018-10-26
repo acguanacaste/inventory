@@ -12,7 +12,7 @@ import {
   getShowAllHandler,
   getHideAllHandler,
   getFilterLayerToggleHandler
-} from "./handlers";
+} from "./handlers"; //event handlers for labels and button
 
 import { MAP, ACCESS_TOKEN, LAYERS, LAYERS_ACTIVE } from "./config";
 
