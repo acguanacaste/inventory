@@ -1,0 +1,24 @@
+.marker{
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+.marker1{
+  background-image: url('https://www.acguanacaste.ac.cr/images/img3/iconos/marker-red.png');
+}
+
+.marker2{
+  background-image: url('https://www.acguanacaste.ac.cr/images/img3/iconos/marker-blue.png');
+}
