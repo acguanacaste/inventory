@@ -29,7 +29,7 @@ export default {
       {
         value: "Marino",
         label: "Marino",
-        color: "hsl(221, 100%, 72%)"
+        color: "hsl(2, 2%, 72%)"
       },
       {
         value: "Bosque Seco",
