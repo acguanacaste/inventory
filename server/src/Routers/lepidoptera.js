@@ -23,12 +23,14 @@ lepidopteraRouter
         })
     })
     .get('/species/:species', (req,res) =>{
-        Lepidoptera.find({'Herbivore species':req.params.species},mapProjection,(err,lepidoptera) =>{
-            res.json(lepidoptera)
-        })
-    })
-    .get('/species/:species/:species2', (req,res) =>{
-        Lepidoptera.find({ $or :[{'Herbivore species':req.params.species},{'Herbivore species':req.params.species2}] },mapProjection,(err,lepidoptera) =>{
+        let species = req.params.species
+            .split(",")
+            .map(function (sp){
+                return {'Herbivore species':sp.trim()}
+        });
+        console.log(species);
+
+        Lepidoptera.find({ $or :species },mapProjection,(err,lepidoptera) =>{
             res.json(lepidoptera)
         })
     })
@@ -37,8 +39,6 @@ lepidopteraRouter
             res.json(lepidoptera)
         })
             .limit(1000)
-    })
-
-
+    });
 
 export default lepidopteraRouter
