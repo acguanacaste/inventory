@@ -15,10 +15,20 @@ const mapProjection = {
     'Sector':1,
     'voucher':1
 };
+const groupCount = {
+    _id:"$Herbivore species",
+    number:{$sum:1}
+}
+
+const options = {
+    $sort:{'Herbivore species':1}
+};
+
+
 
 lepidopteraRouter
     .get('/:voucher', (req,res) =>{
-        Lepidoptera.find({'voucher':req.params.voucher},mapProjection,(err,lepidoptera) =>{
+        Lepidoptera.find({'voucher':req.params.voucher},mapProjection,options,(err,lepidoptera) =>{
             res.json(lepidoptera)
         })
     })
@@ -29,10 +39,38 @@ lepidopteraRouter
                 return {'Herbivore species':sp.trim()}
         });
         console.log(species);
-
-        Lepidoptera.find({ $or :species },mapProjection,(err,lepidoptera) =>{
-            res.json(lepidoptera)
-        })
+        Lepidoptera.aggregate([
+            {
+                $match:{
+                    $or :species
+                }
+            },
+            {
+                $group: {
+                    _id:"$Herbivore species",
+                    count:{$sum:1},
+                    "family":{"$first":"$Herbivore family"},
+                    records:{
+                        "$push":{
+                            voucher: "$voucher",
+                            "collectionDate": "$Collection Date",
+                            longitude: "$Longitude",
+                            latitude: "$Latitude",
+                         //   sector:"$Sector"
+                        }
+                    }
+                }
+            },
+                {$sort:{_id:-1}}
+            ]
+            ,function (err,lepidoptera) {
+                if (err){
+                    throw err;
+                }else{
+                    res.json(lepidoptera)
+                }
+            }
+        );
     })
     .get('/', (req,res) => {
         Lepidoptera.find({},(err,lepidoptera) =>{
