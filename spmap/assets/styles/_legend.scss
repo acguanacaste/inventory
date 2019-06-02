@@ -23,7 +23,10 @@ $deviceWidth: 720px;
 
 #legend {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  padding: 0.4rem;
+  font-family: Georgia, Serif;
+  font-size: 0.8rem;
   h4 {
     display: block;
     margin: 0;
@@ -43,6 +46,21 @@ $deviceWidth: 720px;
   &.active .legend-inner {
     display: block;
   }
+
+  ul{
+    li{
+
+      display: inline-block;
+      margin:0.2rem 0.3rem;
+
+      .marker{
+        vertical-align: middle;
+        position: relative;
+        top: 0.3rem;
+        margin-right: 0.3rem;
+      }
+    }
+  }
 }
 
 .legend-wrapper {
@@ -56,17 +74,6 @@ $deviceWidth: 720px;
 
 @media (min-width: $deviceWidth) {
   #legend {
-    -webkit-tap-highlight-color: transparent;
-    margin-top: 0.6em;
-    position: relative;
-    max-width: 20%;
-    min-width: 220px;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    left: auto;
-    right: auto;
-    order: -1;
     h4 {
       width: auto;
       text-align: left;
@@ -90,6 +97,7 @@ $deviceWidth: 720px;
 }
 
 #legend {
+
   #legend-toggle-icon:before {
     display: inline-block;
     right: 0;

@@ -97,10 +97,14 @@ export default function getMap() {
         // });
         showPopup(feature);
       });
+
+      map.on("hover", function (e) {
+          //add class to set pointer as cursor elemet
+      })
     });
 
   //FULL SCREEN MODE
-  map.addControl(new mapboxgl.FullscreenControl());
+  //map.addControl(new mapboxgl.FullscreenControl());
   // Add zoom conntrol
   const nav = new mapboxgl.NavigationControl({ showCompass: false });
   map.addControl(nav, "top-left");
