@@ -106,7 +106,8 @@ lepidopteraRouter
             .limit(1000)
     })
 
-    .get('/family/', (req, res) => {
+    .get('/families/?', (req, res) => {
+
         Lepidoptera.aggregate([
                 {
                     "$project": familyProjection
@@ -125,7 +126,7 @@ lepidopteraRouter
                       _id:"$_id.family",
                       subfamilies:{
                           $push:{
-                              sufamily:"$_id.subfamily",
+                              subfamily:"$_id.subfamily",
                               count:{$sum:"$count"}
                           }
                       },
@@ -145,7 +146,57 @@ lepidopteraRouter
                 }
             }
         )//aggregate
+
     })
+
+.get('/family/:family',(req,res)=>{
+    console.log('here')
+    let family = req.params.family
+        .split(",")
+        .map(function (fm) {
+            return {'Herbivore family': fm.trim()}
+        });
+    Lepidoptera.aggregate([
+            {
+                $match: {
+                    $or:family
+                },
+            },
+            {
+                $group: {
+                    _id: {
+                        "family": "$Herbivore family",
+                        "subfamily": "$Herbivore subfamily",
+                        "species": "$Herbivore species"
+                    },
+                    count: {$sum: 1},
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        "family": "$_id.family",
+                        "subfamily": "$_id.subfamily"
+                    }
+                    ,
+                    species: {
+                        $push: {"species": "$_id.species", count: {$sum: "$count"}}
+                    },
+                    countRecords: {$sum: "$count"}
+                }
+
+            },
+        ],
+        function (err, lepidoptera) {
+            if (err) {
+                throw err;
+            } else {
+
+                res.json(lepidoptera)
+            }
+        }
+        )
+})
 
 ;
 
