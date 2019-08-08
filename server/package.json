@@ -10,7 +10,11 @@
     "mongoose": "^5.6.8"
   },
   "scripts": {
-    "build": "babel server --out-dir build --presets=es2015",
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "babel src -d build -s",
+    "build": "yarn clean && yarn build-server",
+    "prod": "kill $(lsof -ti TCP:3000) || true && node ./build/index.js",
+    "build-run": "yarn build && yarn prod",
     "start": "nodemon --exec babel-node --presets env src/index.js"
   },
   "description": "Web app to browse biodiverstity invetory data",
