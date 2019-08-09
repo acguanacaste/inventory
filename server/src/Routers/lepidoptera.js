@@ -1,6 +1,5 @@
-import express from 'express'
-//import Lepidoptera from '../models/lepidopteraModel'
-import Lepidoptera from "../models/lepidoptera";
+const express = require('express');
+const Lepidoptera = require("../models/lepidoptera");
 
 const lepidopteraRouter = express.Router();
 const mapProjection = {
@@ -205,4 +204,4 @@ lepidopteraRouter
 ;
 
 
-export default lepidopteraRouter
+module.exports = lepidopteraRouter

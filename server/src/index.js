@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
     , Admin = mongoose.mongo.Admin;
 
 
-import bodyParser from 'body-parser'
+const bodyParser = require('body-parser')
 
-import lepidopteraRouter from './Routers/lepidoptera'
+const lepidopteraRouter = require ('./Routers/lepidoptera');
 
 var config = require('config')
 

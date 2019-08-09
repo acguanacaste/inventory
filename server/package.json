@@ -13,17 +13,12 @@
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel src -d build -s",
     "build": "yarn clean && yarn build-server",
-    "prod": "kill $(lsof -ti TCP:3000) || true && node ./build/index.js",
+    "prod": "kill $(lsof -ti TCP:3000) || true && node ./src/index.js",
     "build-run": "yarn build && yarn prod",
-    "start": "nodemon --exec babel-node --presets env src/index.js"
+    "start": "nodemon src/index.js"
   },
   "description": "Web app to browse biodiverstity invetory data",
   "main": "src/index.js",
   "author": "Federico Matarrita",
-  "license": "GPL-3.0-or-later",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1"
-  }
+  "license": "GPL-3.0-or-later"
 }
