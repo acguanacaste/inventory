@@ -11,30 +11,23 @@ const mapProjection = {
     "longitude": 1,
     "herbivoreFamily": 1
 };
-
 const familyProjection ={
     "herbivoreFamily": 1,
     "herbivoreSubfamily":1,
-}
-const groupCount = {
-    _id: "$herbivoreSpecies",
-    number: {$sum: 1}
-}
-
+};
 const options = {
     $sort: {herbivoreSpecies: 1}
 };
+
 lepidopteraRouter
     .get('/voucher/:voucher', (req, res) => {
-        console.log("vocuher")
-
+        console.log("vocuher");
         Lepidoptera.find({'voucher': req.params.voucher}, mapProjection, options, (err, lepidoptera) => {
             res.json(lepidoptera)
         })
     })
     .get('/species/:species', (req, res) => {
-        console.log("species")
-
+        console.log("species");
         let species = req.params.species
             .split(",")
             .map(function (sp) {
@@ -103,7 +96,7 @@ lepidopteraRouter
             let some = {
                 message:"elp!",
                 lep:lepidoptera
-            }
+            };
             res.json(some)
         })
             .limit(1000)
@@ -153,7 +146,6 @@ lepidopteraRouter
     })
 
 .get('/family/:family',(req,res)=>{
-    console.log('here')
     let family = req.params.family
         .split(",")
         .map(function (fm) {
@@ -204,4 +196,4 @@ lepidopteraRouter
 ;
 
 
-module.exports = lepidopteraRouter
+module.exports = lepidopteraRouter;
