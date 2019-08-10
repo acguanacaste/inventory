@@ -1,9 +1,6 @@
-const mongoose = require('mongoose')
-var config = require('config')
+const mongoose = require('mongoose');
 
-//const mongoUri = `mongodb://${config.get('db.user')}:${config.get('db.password')}@${ config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`
-//mongoose.connect(mongoUri, {useNewUrlParser: true}).connection
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 const lepidopteraModel = new Schema({
         "lepBin": String,
         "adultLiveWtG": String,
