@@ -23,6 +23,10 @@ yarn-error.log
 .env.production.local
 .idea
 
+#environment config
+development.json
+production.json
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

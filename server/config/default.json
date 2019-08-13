@@ -2,8 +2,11 @@
   "db": {
     "host": "localhost",
     "port": "27017",
-    "database": "inventory",
-    "user": "federico",
-    "password": "1q2w3e4r"
+    "database": "test",
+    "user": "user",
+    "password": "password"
+  },
+  "app": {
+    "port": "3000"
   }
 }

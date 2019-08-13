@@ -1,28 +1,26 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose')
     , Admin = mongoose.mongo.Admin;
+const bodyParser = require('body-parser');
+var config = require('config');
+const lepidopteraRouter = require ('./Routers/lepidoptera');
 
-
-import bodyParser from 'body-parser'
-
-import lepidopteraRouter from './Routers/lepidoptera'
-
-var config = require('config')
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = config.get('app.port');
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
 const mongoUri = `mongodb://${config.get('db.user')}:${config.get('db.password')}@${ config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`
 
 var connection = mongoose.connect(mongoUri, { useNewUrlParser: true }, (error) => {
     if (error){
-        console.log('Error connecting to database')
+        console.log('Error connecting to database');
         throw error
     }
-}).connection
+}).connection;
 
 
 /*connection.on('open', function () {
@@ -59,8 +57,9 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-app.use('/api/', lepidopteraRouter)
+app.use('/api/', lepidopteraRouter);
 
 app.listen(port, () => {
     console.log(`listening on port ${ port }`);
 });
+

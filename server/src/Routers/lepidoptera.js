@@ -1,45 +1,37 @@
-import express from 'express'
-//import Lepidoptera from '../models/lepidopteraModel'
-import Lepidoptera from "../models/lepidoptera";
+const express = require('express');
+const Lepidoptera = require("../models/lepidoptera");
 
 const lepidopteraRouter = express.Router();
 const mapProjection = {
-    "Herbivore species": 1,
+    herbivoreSpecies: 1,
     "voucher": 1,
-    "Locality": 1,
-    "Collection Date": 1,
-    "Latitude": 1,
-    "Longitude": 1,
-    "Herbivore family": 1
+    "locality": 1,
+    "collectionDate": 1,
+    "latitude": 1,
+    "longitude": 1,
+    "herbivoreFamily": 1
 };
-
 const familyProjection ={
-    "Herbivore family": 1,
-    "Herbivore subfamily":1,
-}
-const groupCount = {
-    _id: "$Herbivore species",
-    number: {$sum: 1}
-}
-
-const options = {
-    $sort: {'Herbivore species': 1}
+    "herbivoreFamily": 1,
+    "herbivoreSubfamily":1,
 };
+const options = {
+    $sort: {herbivoreSpecies: 1}
+};
+
 lepidopteraRouter
     .get('/voucher/:voucher', (req, res) => {
-        console.log("vocuher")
-
+        console.log("vocuher");
         Lepidoptera.find({'voucher': req.params.voucher}, mapProjection, options, (err, lepidoptera) => {
             res.json(lepidoptera)
         })
     })
     .get('/species/:species', (req, res) => {
-        console.log("species")
-
+        console.log("species");
         let species = req.params.species
             .split(",")
             .map(function (sp) {
-                return {'Herbivore species': sp.trim()}
+                return {herbivoreSpecies: sp.trim()}
             });
         console.log(species);
         Lepidoptera.aggregate([
@@ -55,11 +47,11 @@ lepidopteraRouter
                 {
                     $group: {
                         _id: {
-                            "herb": "$Herbivore species",
-                            locality: "$Locality",
+                            "herb": "$herbivoreSpecies",
+                            locality: "$locality",
                         },
                         count: {$sum: 1},
-                        "family": {"$first": "$Herbivore family"},
+                        "family": {"$first": "$herbivoreFamily"},
                         "data": {"$push": "$$ROOT"}
                     }
                 },
@@ -101,7 +93,11 @@ lepidopteraRouter
     .get('/', (req, res) => {
         console.log("root");
         Lepidoptera.find({}, (err, lepidoptera) => {
-            res.json(lepidoptera)
+            let some = {
+                message:"elp!",
+                lep:lepidoptera
+            };
+            res.json(some)
         })
             .limit(1000)
     })
@@ -115,8 +111,8 @@ lepidopteraRouter
                 {
                     $group: {
                         _id: {
-                            "family": "$Herbivore family",
-                            "subfamily": "$Herbivore subfamily"
+                            "family": "$herbivoreFamily",
+                            "subfamily": "$herbivoreSubfamily"
                         },
                         count:{$sum:1}
                     }
@@ -150,11 +146,10 @@ lepidopteraRouter
     })
 
 .get('/family/:family',(req,res)=>{
-    console.log('here')
     let family = req.params.family
         .split(",")
         .map(function (fm) {
-            return {'Herbivore family': fm.trim()}
+            return {'herbivoreFamily': fm.trim()}
         });
     Lepidoptera.aggregate([
             {
@@ -165,9 +160,9 @@ lepidopteraRouter
             {
                 $group: {
                     _id: {
-                        "family": "$Herbivore family",
-                        "subfamily": "$Herbivore subfamily",
-                        "species": "$Herbivore species"
+                        "family": "$herbivoreFamily",
+                        "subfamily": "$herbivoreSubfamily",
+                        "species": "$herbivoreSpecies"
                     },
                     count: {$sum: 1},
                 }
@@ -201,4 +196,4 @@ lepidopteraRouter
 ;
 
 
-export default lepidopteraRouter
+module.exports = lepidopteraRouter;
