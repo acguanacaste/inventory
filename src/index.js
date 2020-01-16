@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 //Connect to Mongo, allow development black password
 const user = (config.get('db.user')!=""&&config.get('db.password')!="")?`${config.get('db.user')}:${config.get('db.password')}@`:"";
 const mongoUri = `mongodb://${user}${ config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`;
-var connection = mongoose.connect(mongoUri, { useNewUrlParser: true }, (error) => {
+var connection = mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
     if (error){
         console.log('Error connecting to database');
         throw error
