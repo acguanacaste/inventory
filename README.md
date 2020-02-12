@@ -1,4 +1,4 @@
-#Inventario de Biodiversidad
+# Inventario de Biodiversidad
 
 Este es el servidor para obtener datos de la base de base de datos del inventario de Lepidopteras de ACG, realizado por el Dr. Daniel Janzen, la Dra. Winnie Hallachs y el equipo de parataxónomos de ACG. 
 Referencia: http://janzen.sas.upenn.edu/ 

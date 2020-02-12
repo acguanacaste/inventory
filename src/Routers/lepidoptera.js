@@ -18,16 +18,17 @@ const familyProjection ={
 const options = {
     $sort: {herbivoreSpecies: 1}
 };
-
+const dateOptions =  { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute:"numeric" };
+let today = new Date();
 lepidopteraRouter
     .get('/voucher/:voucher', (req, res) => {
-        console.log("vocuher");
+        console.log(today.toLocaleDateString("en-US", dateOptions)," - vocuher");
         Lepidoptera.find({'voucher': req.params.voucher}, mapProjection, options, (err, lepidoptera) => {
             res.json(lepidoptera)
         })
     })
     .get('/species/:species', (req, res) => {
-        console.log("species");
+        console.log(today.toLocaleDateString("en-US", dateOptions)," - species");
         let species = req.params.species
             .split(",")
             .map(function (sp) {
@@ -91,7 +92,7 @@ lepidopteraRouter
     })//species
 
     .get('/', (req, res) => {
-        console.log("root");
+        console.log(today.toLocaleDateString("en-US", dateOptions)," - root");
         Lepidoptera.find({}, (err, lepidoptera) => {
             let some = {
                 message:"elp!",
@@ -103,7 +104,7 @@ lepidopteraRouter
     })
 
     .get('/families/?', (req, res) => {
-
+        console.log(today.toLocaleDateString("en-US", dateOptions)," - families");
         Lepidoptera.aggregate([
                 {
                     "$project": familyProjection
