@@ -17,7 +17,7 @@ const user = (config.get('db.user')!=""&&config.get('db.password')!="")?`${confi
 const mongoUri = `mongodb://${user}${ config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`;
 var connection = mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
     if (error){
-        console.log('Error connecting to database');
+        console.error('Error connecting to database');
         throw error
     }
 }).connection;
