@@ -95,4 +95,4 @@ const lepidopteraModel = new Schema({
     }
     , {strict: false});
 
-module.exports = mongoose.model('lepidoptera', lepidopteraModel)
+module.exports = mongoose.model('lepidoptera', lepidopteraModel);
