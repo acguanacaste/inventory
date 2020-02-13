@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
     , Admin = mongoose.mongo.Admin;
 const bodyParser = require('body-parser');
 var config = require('config');
-const lepidopteraRouter = require ('./Routers/lepidoptera');
+
+
 
 //Express App setup
 const app = express();
@@ -30,7 +31,10 @@ app.use(function(req, res, next) {
 });
 
 //Add Routers
+const lepidopteraRouter = require ('./Routers/lepidoptera');
+const aereoRouter = require ('./Routers/aereo');
 app.use('/api/', lepidopteraRouter);
+app.use('/api/', aereoRouter);
 
 //Listen on port
 app.listen(port, () => {
