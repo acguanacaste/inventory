@@ -1,5 +1,14 @@
 #!/bin/bash
+#Dump data from FileMake, when selecting the fields to export, choose to dump the table, not the current view
+#rename to csv
+#copy header line in an other text file
+#replace # by "num"
+##Remove periods and symbols form header: [?|\.]
+#trasnfor to camelCase by doing (this has to be run on a linux box, Mac OS's sed seems not to do the trick): cat headers.csv | sed -E 's/^[A-Z]/\l&/; s/\s([A-Za-z])/\u\1/g'
+#delimit fields by " and separator , (replace , by  ",")
+#en jetbrains, seleccionar la , hasta el próximo field, y reemplazar por ", " para dejarlo en una línea
+headers='["numFemalePara","numMalePara","numParaEclose","numParaHyperPinned","numPupcoceclhypers","numPupcoceclnothing","numPupcoceclpara","numPupariaCocoons","numSecparaecl","numTerparaecl","adultLiveWtG","adultVoucherFate","amnhCode","anotherPara","averageCollToPrepupa","averagePrepToEcl","barcodeLength","barcodeWithN","blank1","class","collectedGroup","collectedGroupTrait","collectionDate","collector","commentsOnHyperparasite","commentsOnParasitoid","comparison","comparisonHyperparasites","comparisonParasites","continent","country","dateCollToPrepupa","dateDnaSample","dateFirstEclose","datePupariaCocoons","dateSececl","dateStamp","dateTerecl","daysHostCollToParasiteEclose","daysHostPrepupaToParaEclose","daysParasitePrepupaToEclose","daysPrepupaToEclose","daysPupateToEclose","daysToPupate","detHerb","detHost","detHyperpara","detPara","dhjPlantColl","dhjparSex","dhjparvoucher","dnaSampleTo","dump","east","elevation","entry","familyIdaeChange","forewingLengthMm","foundAs","fpdes","gelatinCapsuleToWhom","herbeclodate","herbprepdate","herbpupdate","herbivoreComment","herbivoreFamily","herbivoreGenbankAcc","herbivoreGenusName","herbivoreSex","herbivoreSpecies","herbivoreSubfamily","herbivoreTribe","hostFamily","hostSpecies","hyperBin","hyperEclosDate","hyperdhjparvoucher","hyperparasiteFamily","hyperparasiteSpecies","hyperparasiteSubfamily","idenBasisHerb","idenBasisHost","idenBasisPara","immatureParts","kingdom","latLong","latitude","lepBin","locality","longitude","micro","mostRecentDateNjTreeIdentified","multiple","njtreeSpecies","north","numberWithinYear","order","otherVoucherNumber","paraBin","parasiteFamily","parasiteGenusName","parasiteOrder","parasiteSpecies","parasiteSubfamily","parasiteTribe","photo","phylum","plantNickname","primaryEcosystem","province","pupalLiveWtG","rearingOutcome","scannedPhoto","search","secondaryEcosystem","sector","sexHyperpara","siteOfPupariumCocoon","sourceOfParaLarva","specimenDepositedAt","stage","standardUnit","substituteCalc","subtribe","summaryCountHerbfamily","summaryCountHerbivores","summaryCountHostSpecies","summaryCountParasiteSpecies","timeStamp","type","vouchsececl","vouchterecl","voucher","whenEnter","whoEnterData","wwwadultphoto","wwwgenus%20species","wwwlinkadult","wwwlinkphoto","year"]'
 npm i -g csvtojson
-csvtojson --headers='["photoid","file","title","description","latitude","longitude","year"]' foto.csv  > fotos1.json
-mongoimport -vv -d inventory -c aereos --type json --file fotos1.json --jsonArray
+csvtojson --headers="$headers" export2020.csv  > export2020.json
+mongoimport -vv -d inventory -c lepi2 --type json --file export2020.json --jsonArray
 mongo setupDatabase.js

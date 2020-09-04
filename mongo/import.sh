@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-#Remove periods and symbols form header, delimit fields by " and separator ,
+#delimit fields by " and separator ,
+##Remove periods and symbols form header: [?|\.]
 #remove header from filemaker export
-#tail -n +2 gcavoucher-lista.csv  > headless.csv
+#tail -n +2 export20200224-2.csv  > headless.csv
 #echo "Headles\n"
 #cat headers.csv headless.csv >> importdata.csv
 #echo "megred files\n"

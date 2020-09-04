@@ -4,6 +4,12 @@ db.aereo.find({});
 db.aereo.updateMany({},
     {$set:{ "album":"1"}}
 );
+db.lepidopteras.createIndex({herbivoreSpecies:1});
+db.lepidopteras.createIndex({locality:1});
+db.lepidopteras.createIndex({herbicoreFamily:1});
+db.lepidopteras.createIndex({collectionDate: 1});
+db.lepidopteras.createIndex({voucher: 1});
+
 //add location GeoJSON Point
 db.aereo.updateMany({},
     {$unset:{location:""}});
@@ -23,6 +29,10 @@ db.aereo.find().forEach(function (i)
     }
 );
 db.aereo.createIndex({location:"2dsphere"});
+db.aereo.createIndex({photoid:1});
+db.aereo.createIndex({file:1});
+db.aereo.createIndex({year:1});
+db.aereo.createIndex({album:1});
 
 db.aereo.find({
     location: {
