@@ -14,13 +14,18 @@ module.exports = {
         env: {
             PORT: 3000,
             NODE_ENV: 'production',
-            NODE_CONFIG_DIR: "/srv/www/api.acguanacaste.ac.cr/config/"
-            
+            NODE_CONFIG_DIR: "/srv/www/api.acguanacaste.ac.cr/config/",
+            error_file : '/srv/log/node/lepidoptera-error.log',
+            log_file : '/srv/log/node/lepidoptera-log.log',
+            out_file: '/srv/log/node/lepidoptera-out.log'
         },
         env_production: {
             NODE_ENV: 'production',
             PORT: 3000,
-            NODE_CONFIG_DIR: "/srv/www/api.acguanacaste.ac.cr/config/"
+            NODE_CONFIG_DIR: "/srv/www/api.acguanacaste.ac.cr/config/",
+            error_log: '/srv/log/node/lepidoptera-error.log',
+            log_file: '/srv/log/node/lepidoptera-log.log',
+            out_file: '/srv/log/node/lepidoptera-out.log'
         }
     }]
     
