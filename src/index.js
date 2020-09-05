@@ -16,12 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true}));
 //Connect to Mongo, allow development black password
 const user = (config.get('db.user')!=""&&config.get('db.password')!="")?`${config.get('db.user')}:${config.get('db.password')}@`:"";
 const mongoUri = `mongodb://${user}${ config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`;
+console.log(mongoUri);
 var connection = mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true}, (error) => {
     if (error){
         console.error('Error connecting to database');
         throw error
     }
-}).connection;
+})
 
 //Allow cross origins
 app.use(function(req, res, next) {
